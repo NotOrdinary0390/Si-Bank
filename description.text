@@ -1,0 +1,69 @@
+Conti Correnti Parte 1
+Creare una applicazione web in grado di gestire dei conti correnti.
+Ecco la struttura di massima del database:
+TConticorrenti
+1. ContoCorrenteID int A_I
+2. CodiceTitolare int
+3. Password Text
+4. IBAN Text
+5. Email Text
+6. NomeTitolare Text
+Per esempio: CodiceTitolare=6474888 e Password=”hfyf!kdjs8sy!”
+TMovimentiContoCorrente
+1. MovimentoID int chiave
+2. ContoCorrenteID int
+3. Data Date
+4. Importo Float
+5. Saldo Float
+6. CategoriaMovimentoID int
+7. DescrizioneEstesa Text
+
+TCategorieMovimenti
+1. CategoriaMovimentoID int chiave
+2. NomeCategoria Text
+3. Tipologia Text
+Specifiche:
+1. Caricare delle CategorieMovimenti (Apertura Conto, Bonifico Entrata, Bonifico Uscita, Prelievo
+contanti, Pagamento Utenze, Ricarica, Versamento Bancomat etc…). Ogni Categoria deve avere la
+tipologia corretta (“Entrata” o “Uscita”)
+2. Caricare 15 Movimenti per un conto corrente fittizio (ContoCorrenteID=1) : il primo movimento
+deve avere come Descrizione Estesa “ Apertura Conto” (versamento 1000 euro per esempio) e poi
+caricare altri 14 movimenti (sia di Entrata che di Uscita). Attenzione che in ogni movimento va
+caricato il saldo finale (in base al saldo precedente). La descrizione estesa per esempio è “Bonifico
+disposto a favore di….” Oppure “ Addebito diretto a favore di…” oppure “Bonifico disposto da…”.
+3. Creare la pagina di login (inserimento di Codice Titolare e Password) che manda ad una Home Page
+dove viene visualizzato: Benvenuto Mario Rossi, i dati i principali del conto corrente, il saldo e una
+table con gli ultimi 5 movimenti.
+
+Conti Correnti Parte 2
+1. Creare la pagina di RicercaMovimenti1.php: premendo un pulsante ricerca gli ultimi n movimenti
+inseriti tramite text e deve visualizzare il saldo finale del conto corrente. I movimenti verrano
+visualizzati in una table html in ordine decrescente di Data (Data, Importo, NomeCategoria). Per
+visualizzare NomeCategoria utilizzare un join.
+2. Creare la pagina di RicercaMovimenti2.php: premendo un pulsante ricerca i movimenti di una certa
+CategoriaMovimenti scelta tramite Select (popolato con la lista delle categorie movimenti). Non
+visualizza il saldo finale. I movimenti verranno visualizzati in una table html in ordine decrescente di
+Data (Data, Importo, NomeCategoria). Per visualizzare NomeCategoria utilizzare un join.
+3. Creare la pagina di RicercaMovimenti3.php: premendo un pulsante ricerca i movimenti fra due date
+(non visualizza il saldo finale). I movimenti verranno visualizzati in una table html in ordine
+decrescente di Data (Data, Importo, NomeCategoria). Per visualizzare NomeCategoria utilizzare un
+join.
+4. Aggiungere una colonna link “Dettagli” che permette di accedere alla pagina
+DettaglioMovimento.php dove verrà visualizzato il dettaglio del movimento selezionato (tutti i
+campi della TMovimentiContoCorrente)
+
+Conti Correnti Parte 3
+Implementare le seguenti funzionalità:
+1. Ricarica di un cellulare inserendo numero telefonico, scelta dell’operatore tramite select (iliad, tim,
+vodafone etc..) e scelta del taglio della ricarica tramite select (5,10,20,30 euro etc..). La procedura
+andrà ad inserire un nuovo record in TMovimenti col relativo saldo aggiornato. Ovviamente va
+verificato che ci sia saldo disponibile.
+2. Bonifico da un conto corrente ad un altro conto corrente della stessa applicazione (bisogna fare
+una procedura per l’inserimento dell’IBAN del destinatario e importo bonifico). Ovviamente va
+verificato che ci sia saldo disponibile.
+-3. Modificare la Procedura 2 in modo che per confermare il bonifico venga inviato un codice di
+sicurezza tramite email all’indirizzo email di chi fa il bonifico. Solo inserendo nel sito il codice
+corretto si avrà l’effettiva “partenza”del bonifico.
+-4. Procedura di esportazione in formato csv/excel delle ricerche dei movimenti della parte 2
+-5. Modificare il Login in modo che ad ogni tentativo di accesso al sito venga inviato un codice di
+sicurezza come nel punto 3
